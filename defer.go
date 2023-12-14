@@ -6,17 +6,31 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello")
-	for i := 1; i <= 3; i++ {
-		defer fmt.Println(i)
-	}
-	fmt.Println("World")
+	//fmt.Println("Hello")
+	//for i := 1; i <= 3; i++ {
+	//	defer fmt.Println(i)
+	//}
+	//fmt.Println("World")
 
-	fmt.Println(unintuitive())
-	fmt.Println(intuitive())
+	//fmt.Println(unintuitive())
+	//fmt.Println(intuitive())
 
-	VeryLongTimeFunction()
+	//VeryLongTimeFunction()
+	fmt.Println(Global)
+	UseGlobal()
+	fmt.Println(Global)
 
+}
+
+var Global = 5
+
+func UseGlobal() {
+	defer func(checkout int) {
+		Global = checkout // присваиваем Global значение аргумента
+	}(Global) // копируем значение Global в аргументы функции
+	Global = 42 // Изменяем Global
+	fmt.Println(Global)
+	// Здесь будет вызвана отложенная функция
 }
 
 func unintuitive() (value string) {
